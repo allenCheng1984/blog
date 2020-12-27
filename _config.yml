@@ -27,6 +27,8 @@ url: "https://blog.allen-cheng.com" # the base hostname & protocol for your site
 twitter_username: AllenCheng1984
 github_username:  allenCheng1984
 
+# Google Analytics
+google_analytics: G-32L8WDYR66
 # Disqus Comments
 disqus:
     # Leave shortname blank to disable comments site-wide.
