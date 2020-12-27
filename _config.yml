@@ -22,7 +22,7 @@ title: Allen's Blog
 email: allen.cheng1984@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   一個興趣使然的 Blog，想寫什麼就寫什麼。
-baseurl: "/blog" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: AllenCheng1984
 github_username:  allenCheng1984
