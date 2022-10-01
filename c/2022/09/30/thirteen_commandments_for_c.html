@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>The Thirteen Commandments for Newbie C/C++ Programmers | Allen’s Blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="The Thirteen Commandments for Newbie C/C++ Programmers" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="from PTT C_and_CPP 版" />
+<meta property="og:description" content="from PTT C_and_CPP 版" />
+<link rel="canonical" href="https://blog.allen-cheng.com/c/2022/09/30/thirteen_commandments_for_c.html" />
+<meta property="og:url" content="https://blog.allen-cheng.com/c/2022/09/30/thirteen_commandments_for_c.html" />
+<meta property="og:site_name" content="Allen’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-30T22:00:50+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Thirteen Commandments for Newbie C/C++ Programmers" />
+<script type="application/ld+json">
+{"headline":"The Thirteen Commandments for Newbie C/C++ Programmers","dateModified":"2022-09-30T22:00:50+00:00","datePublished":"2022-09-30T22:00:50+00:00","description":"from PTT C_and_CPP 版","url":"https://blog.allen-cheng.com/c/2022/09/30/thirteen_commandments_for_c.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.allen-cheng.com/c/2022/09/30/thirteen_commandments_for_c.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.allen-cheng.com/feed.xml" title="Allen's Blog" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'G-32L8WDYR66', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Allen&#39;s Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/">Categories</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The Thirteen Commandments for Newbie C/C++ Programmers</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-09-30T22:00:50+00:00" itemprop="datePublished">Sep 30, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="https://www.ptt.cc/bbs/C_and_CPP/M.1465304337.A.9F2.html">from PTT C_and_CPP 版</a></p>
+
+<p><a href="https://hackmd.io/@allencheng/rkfm2IHGo">友善閱讀(HackMD)</a></p>
+
+<p>這裡做排版與筆記, 以 C 語言為主</p>
+
+<hr />
+
+<h2 id="01-不可以使用尚未給予適當初值的變數">01. 不可以使用尚未給予適當初值的變數</h2>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">accumulate</span><span class="p">(</span><span class="kt">int</span> <span class="n">max</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">sum</span><span class="p">;</span>    <span class="cm">/* 未給予初值的區域變數，其內容值是垃圾 */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="p">;</span> <span class="n">num</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  <span class="n">sum</span> <span class="o">+=</span> <span class="n">num</span><span class="p">;</span>  <span class="p">}</span>
+    <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">accumulate</span><span class="p">(</span><span class="kt">int</span> <span class="n">max</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="cm">/* 正確的賦予適當的初值 */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="p">;</span> <span class="n">num</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  <span class="n">sum</span> <span class="o">+=</span> <span class="n">num</span><span class="p">;</span>  <span class="p">}</span>
+    <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>備註：</p>
+
+<p>根據 C Standard，具有靜態儲存期(static storage duration)的變數，<br />
+例如 全域變數(global variable)或帶有 static 修飾符者等，<br />
+如果沒有顯式初始化的話，根據不同的資料型態予以進行以下初始化：</p>
+
+<p>若變數為算術型別 (int , double , …) 時，初始化為零或正零。<br />
+若變數為指標型別 (int<em>, double</em>, …) 時，初始化為 null 指標。<br />
+若變數為複合型別 (struct, double _Complex, …) 時，遞迴初始化所有成員。<br />
+若變數為聯合型別 (union) 時，只有其中的第一個成員會被遞迴初始化。</p>
+
+<hr />
+
+<h2 id="02-不能存取超過陣列既定範圍的空間">02. 不能存取超過陣列既定範圍的空間</h2>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">str</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">str</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>說明：</p>
+
+<p>宣告陣列時，所給的陣列元素個數值如果是 N, 那麼我們在後面<br />
+透過 [索引值] 存取其元素時，所能使用的索引值範圍是從 0 到 N-1</p>
+
+<p>C/C++ 為了執行效率，並不會自動檢查陣列索引值是否超過陣列邊界，<br />
+我們要自己來確保不會越界。一旦越界，操作的不再是合法的空間，<br />
+將導致無法預期的後果。</p>
+
+<hr />
+
+<h2 id="03-不可以提取不知指向何方的指標">03. 不可以提取不知指向何方的指標</h2>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">pc1</span><span class="p">;</span>         <span class="cm">/* 未給予初值，不知指向何方 */</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">pc2</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>  <span class="cm">/* pc2 起始化為 null pointer */</span>
+<span class="o">*</span><span class="n">pc1</span> <span class="o">=</span> <span class="sc">'a'</span><span class="p">;</span>        <span class="cm">/* 將 'a' 寫到不知何方，錯誤 */</span>
+<span class="o">*</span><span class="n">pc2</span> <span class="o">=</span> <span class="sc">'b'</span><span class="p">;</span>        <span class="cm">/* 將 'b' 寫到「位址0」，錯誤 */</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">c</span><span class="p">;</span>          <span class="cm">/* c 的內容尚未起始化 */</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">pc1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span>  <span class="cm">/* pc1 指向字元變數 c */</span>
+<span class="o">*</span><span class="n">pc1</span> <span class="o">=</span> <span class="sc">'a'</span><span class="p">;</span>      <span class="cm">/* c 的內容變為 'a' */</span>
+
+<span class="cm">/* 動態分配 10 個 char(其值未定),並將第一個char的位址賦值給 pc2 */</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">pc2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">pc2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'b'</span><span class="p">;</span>    <span class="cm">/* 動態配置來的第 0 個字元，內容變為 'b' */</span>
+<span class="n">free</span><span class="p">(</span><span class="n">pc2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>說明：</p>
+
+<p>指標變數必需先指向某個可以合法操作的空間，才能進行操作。<br />
+( 使用者記得要檢查 malloc 回傳是否為 NULL，礙於篇幅本文假定使用上皆合法，也有正確歸還記憶體 )</p>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>             <span class="cm">/* name 尚未指向有效的空間 */</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Your name, please: "</span><span class="p">);</span>
+<span class="n">fgets</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>   <span class="cm">/* 您確定要寫入的那塊空間合法嗎??? */</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Hello, %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 如果編譯期就能決定字串的最大空間，那就不要宣告成 char* 改用 char[] */</span>
+
+<span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">21</span><span class="p">];</span>         <span class="cm">/* 可讀入字串最長 20 個字元，保留一格空間放 '\0' */</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Your name, please: "</span><span class="p">);</span>
+<span class="n">fgets</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Hello, %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>正確例子(2)：</p>
+
+<p>若是在執行時期才能決定字串的最大空間，C提供兩種作法：</p>
+
+<p><strong>利用 malloc() 函式來動態分配空間，用malloc宣告的陣列會被存在heap</strong><br />
+須注意：若是宣告較大陣列，要確認malloc的回傳值是否為NULL</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="n">length</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"請輸入字串的最大長度(含null字元): "</span><span class="p">);</span>
+<span class="n">scanf</span><span class="p">(</span><span class="s">"%u"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">length</span><span class="p">);</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">length</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>         <span class="c1">// name != NULL</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"您輸入的是 %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>            <span class="c1">// name == NULL</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">"輸入值太大或系統已無足夠空間"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cm">/* 最後記得 free() 掉 malloc() 所分配的空間 */</span>
+<span class="n">free</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="n">name</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>C99開始可使用variable-length array (VLA)</strong>
+須注意：</p>
+<ul>
+  <li>因為VLA是被存放在stack裡，使用前要確認array size不能太大</li>
+  <li>不是每個compiler都支援VLA <code class="language-plaintext highlighter-rouge">(gcc和clang支援VLA，Visual C++不支援)</code></li>
+  <li>C++ Standard不支援 <code class="language-plaintext highlighter-rouge">(雖然有些compiler支援)</code></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="nf">read_and_process</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">vals</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_val</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">process</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="04-不要試圖用-char-去更改一個字串常數">04. 不要試圖用 char* 去更改一個”字串常數</h2>
+
+<p><strong>試圖去更改字串常數(string literal)的結果會是undefined behavior。</strong></p>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span><span class="o">*</span> <span class="n">pc</span> <span class="o">=</span> <span class="s">"john"</span><span class="p">;</span>  <span class="cm">/* pc 現在指著一個字串常數 */</span>
+<span class="o">*</span><span class="n">pc</span> <span class="o">=</span> <span class="sc">'J'</span><span class="p">;</span>  <span class="cm">/* undefined behaviour，結果無法預測 */</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="s">"jane"</span><span class="p">;</span>        <span class="cm">/* 合法，pc指到在別的位址的另一個字串常數 */</span>
+                    <span class="cm">/* 但是"john"這個字串還是存在原來的地方不會消失 */</span>
+</code></pre></div></div>
+
+<p>因為 <code class="language-plaintext highlighter-rouge">char* pc = "john"</code> 這個動作會新增一個內含元素為 <code class="language-plaintext highlighter-rouge">"john\0"</code> 的 <code class="language-plaintext highlighter-rouge">static char[5]</code>，然後pc會指向這個static char的位址(通常是唯讀)。</p>
+
+<p>若是試圖存取這個 <code class="language-plaintext highlighter-rouge">static char[]</code> ，Standard並沒有定義結果為何。</p>
+
+<p><code class="language-plaintext highlighter-rouge">pc = "jane"</code> 這個動作會把 pc 指到另一個沒在用的位址然後新增一個內含元素為 <code class="language-plaintext highlighter-rouge">"jane\0" </code>的 <code class="language-plaintext highlighter-rouge">static char[5]</code>。<br />
+可是之前那個字串 <code class="language-plaintext highlighter-rouge">"john\n"</code> 還是留在原地沒有消失。</p>
+
+<p>通常編譯器的作法是把字串常數放在一塊 read only(.rdata) 的區域內，此區域大小是有限的，所以如果你重複把 pc 指給不同的字串常數，是有可能會出問題的。</p>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">pc</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"john"</span><span class="p">;</span>  <span class="cm">/* pc 現在是個合法的陣列，裡面住著字串 john */</span>
+                     <span class="cm">/* 也就是 pc[0]='j', pc[1]='o', pc[2]='h',
+                                         pc[3]='n', pc[4]='\0'  */</span>
+<span class="o">*</span><span class="n">pc</span> <span class="o">=</span> <span class="sc">'J'</span><span class="p">;</span>
+<span class="n">pc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'H'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>說明：</p>
+
+<p>字串常數的內容應該要是”唯讀”的。您有使用權，但是沒有更改的權利。<br />
+若您希望使用可以更改的字串，那您應該將其放在合法空間</p>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="s">"Hello, "</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="s">"world!"</span><span class="p">;</span>
+<span class="cm">/* strcat() 不會另行配置空間，只會將資料附加到 s1 所指唯讀字串的後面，
+   造成寫入到程式無權碰觸的記憶體空間 */</span>
+<span class="n">strcat</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* s1 宣告成陣列，並保留足夠空間存放後續要附加的內容 */</span>
+<span class="kt">char</span> <span class="n">s1</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="s">"Hello, "</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="s">"world!"</span><span class="p">;</span>
+<span class="cm">/* 因為 strcat() 的返回值等於第一個參數值，所以 s3 就不需要了 */</span>
+<span class="n">strcat</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>備註：</p>
+
+<p>由於不加const容易造成混淆，<br />
+建議不管是C還是C++一律用 const char* 定義字串常數。</p>
+
+<hr />
+<h2 id="05-不能在函式中回傳一個指向區域性自動變數的指標">05. 不能在函式中回傳一個指向區域性自動變數的指標</h2>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="nf">getstr</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">=</span> <span class="s">"hello, "</span><span class="p">;</span> <span class="cm">/* 將字串常數"hello, "的內容複製到buf陣列 */</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">buf</span><span class="p">;</span> <span class="c1">// &lt;== 有問題</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>說明：</p>
+
+<p>區域性自動變數，將會在離開該區域時(本例中就是從getstr函式返回時)<br />
+被消滅，因此呼叫端得到的指標所指的字串內容就失效了。</p>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">getstr</span><span class="p">(</span><span class="kt">char</span> <span class="n">buf</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">buflen</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="k">const</span> <span class="n">s</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"hello, "</span><span class="p">;</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">*</span> <span class="nf">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">pInteger</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span> <span class="mi">10</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="n">pInteger</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">pFromfoo</span> <span class="o">=</span> <span class="n">foo</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>說明：</p>
+
+<p>上例雖然回傳了函式中的指標，但由於指標內容所指的位址並非區域變數，而是用動態的方式抓取而得，換句話說這塊空間是長在 heap 而非 stack，又因 heap 空間並不會自動回收，因此這塊空間在離開函式後，依然有效。<br />
+(但是這個例子可能會因為 programmer 的疏忽，忘記 free 而造成memory leak)</p>
+
+<hr />
+<h2 id="06-不可以只做-malloc-而不做相應的-free">06. 不可以只做 malloc(), 而不做相應的 free()</h2>
+
+<p>但若不是用 <code class="language-plaintext highlighter-rouge">malloc()</code> 所得到的記憶體，則不可以 <code class="language-plaintext highlighter-rouge">free()</code>。已經 <code class="language-plaintext highlighter-rouge">free()</code>了所指記憶體的指標，在它指向另一塊有效的動態分配得來的空間之前，不可以再被 <code class="language-plaintext highlighter-rouge">free()</code>，也不可以提取(dereference)這個指標。</p>
+
+<p>小技巧: 可在 free 之後將指標指到 <code class="language-plaintext highlighter-rouge">NULL</code>， free 不會對空指標作用。</p>
+
+<p>例：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>  <span class="c1">// free不會對空指標有作用</span>
+</code></pre></div></div>
+
+<hr />
+<h2 id="07-在數值運算賦值或比較中不可以隨意混用不同型別的數值">07. 在數值運算、賦值或比較中不可以隨意混用不同型別的數值</h2>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">2000000000</span> <span class="o">+</span> <span class="mi">2000000000</span><span class="p">;</span>  <span class="cm">/* 超出 int 存放範圍 */</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="mi">2000000000</span> <span class="o">+</span> <span class="mi">2000000000</span><span class="p">);</span>
+<span class="kt">double</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 全部都用 unsigned int, 注意數字後面的 u, 大寫 U 也成 */</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">2000000000u</span> <span class="o">+</span> <span class="mi">2000000000u</span><span class="p">;</span>
+
+<span class="cm">/* 或是用顯式的轉型 */</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span> <span class="mi">2000000000</span> <span class="o">+</span> <span class="mi">2000000000</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span> <span class="o">/</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>錯誤例子:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>  <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>說明：<br />
+由於 int 與 unsigned 共同運算的時候，會轉換 int 為 unsigned，因此迴圈條件永遠滿足，與預期行為不符</p>
+
+<p>–</p>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="mh">0x80</span><span class="p">;</span>   <span class="cm">/* no problem */</span>
+<span class="kt">char</span> <span class="n">b</span> <span class="o">=</span> <span class="mh">0x80</span><span class="p">;</span>    <span class="cm">/* implementation-defined result */</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">b</span> <span class="o">==</span> <span class="mh">0x80</span> <span class="p">)</span> <span class="p">{</span>        <span class="cm">/* 不一定恒真 */</span>
+    <span class="n">printf</span><span class="p">(</span> <span class="s">"b ok</span><span class="se">\n</span><span class="s">"</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>說明：<br />
+語言並未規定 char 天生為 unsigned 或 signed，因此將 0x80 放入 char 型態的變數，將會視各家編譯器不同作法而有不同結果</p>
+
+<p>–</p>
+
+<p>錯誤例子(以下假設為在32bit機器上執行)：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;math.h&gt;
+</span><span class="kt">long</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2147483648</span> <span class="p">;</span>  <span class="c1">// 2147483648 = 2 的 31 次方</span>
+<span class="k">while</span> <span class="p">(</span> <span class="n">labs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>   <span class="c1">// labs(-2147483648) &lt;0 有可能發生</span>
+    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>說明：<br />
+如果你去看 C99/C11 Standard，你會發現 long 變數的最大/最小值為</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* (被 define 在 limits.h) */</span>
+<span class="n">LONG_MIN</span>      <span class="o">-</span><span class="mi">2147483647</span>  <span class="c1">// compiler實作時最小值不可大於 -(2147483648-1)</span>
+<span class="n">LONG_MAX</span>       <span class="mi">2147483647</span>  <span class="c1">// compiler實作時最小值不可小於  (2147483648-1)</span>
+</code></pre></div></div>
+
+<p>不過由於 32bit 能顯示的範圍就是 2**32 種，所以一般 16/32bit 作業系統會把 LONG_MIN 多減去1，也就是 int 的顯示範圍為 (-LONG_MAX - 1) ~ LONG_MAX。<br />
+(64bit 的作業系統 long 多為 8 bytes，但是依舊符合 Standard 要求的最小範圍)</p>
+
+<p>當程式跑到 <code class="language-plaintext highlighter-rouge">labs(-2147483648)&gt;0</code> 時，由於 2147483648 大於 LONG_MAX，<br />
+Standard 告訴我們，當 labs 的結果無法被 long 有限的範圍表示，編譯器會怎麼幹就看他高興 (undefined behavior)。<br />
+(不只 long ，其他如 int 、 long long等以此類推)</p>
+
+<p>補充資料：</p>
+
+<ul>
+  <li>C11 Standard 5.2.4.2.1, 7.22.6.1</li>
+  <li>https://www.fefe.de/intof.html</li>
+</ul>
+
+<hr />
+<h2 id="08-iiiifi哪個先執行跟順序有關">08. ++i/i++/–i/i–/f(&amp;i)哪個先執行跟順序有關</h2>
+
+<p><code class="language-plaintext highlighter-rouge">++i/i++</code> 和 <code class="language-plaintext highlighter-rouge">--i/i--</code> 的問題幾乎每個月都會出現，所以特別強調。</p>
+
+<p>當一段程式碼中，某個變數的值用某種方式被改變一次以上，例如 <code class="language-plaintext highlighter-rouge">++x</code>/ <code class="language-plaintext highlighter-rouge">--x</code> / <code class="language-plaintext highlighter-rouge">x++</code> / <code class="language-plaintext highlighter-rouge">x--</code> / <code class="language-plaintext highlighter-rouge">function(&amp;x)(能改變x的函式)</code></p>
+<ul>
+  <li>如果 Standard 沒有特別去定義某段敘述中哪個部份必須被先執行，那結果會是 undefined behavior(結果未知)。</li>
+  <li>如果 Standard 有特別去定義執行順序，那結果就根據執行順序決定。</li>
+</ul>
+
+<p>C/C++均正確的例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">--</span><span class="n">a</span> <span class="o">||</span> <span class="o">++</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>        <span class="c1">// || 左邊先計算，如果左邊為 1 右邊就不會算</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">))</span> <span class="p">{}</span>      <span class="c1">// &amp;&amp; 左邊先計算，如果左邊為 0 右邊就不會算</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">)</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// 問號左邊先計算</span>
+<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">);</span>       <span class="c1">// 這裡的逗號為運算子，表示依序計算</span>
+</code></pre></div></div>
+
+<p>C/C++均錯誤的例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="o">++</span><span class="n">i</span> <span class="o">+</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span> <span class="c1">// undefined behavior，Standard 沒定義 + 號哪邊先執行</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">++</span><span class="p">;</span>           <span class="c1">// undefined behavior, Standard 沒定義 = 號哪邊先執行</span>
+<span class="n">printf</span><span class="p">(</span> <span class="s">"%d %d %d"</span><span class="p">,</span> <span class="n">I</span><span class="o">++</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="o">&amp;</span><span class="n">I</span><span class="p">),</span> <span class="n">I</span><span class="o">++</span> <span class="p">);</span> <span class="c1">// undefined behavior, 原因同上</span>
+<span class="n">foo</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">);</span>     <span class="c1">// undefined behavior，這裡的逗號是用來分隔引入參數的</span>
+                   <span class="c1">// 分隔符(separator) 而非運算子， Standard 沒定義哪邊先執行</span>
+</code></pre></div></div>
+
+<p>補充資料</p>
+
+<ul>
+  <li>Undefined behavior and sequence points
+http://stackoverflow.com/questions/4176328/undefined-behavior-and-
+sequence-points)</li>
+  <li>C11 Standard 6.5.13-17，Annex C</li>
+  <li>Sequence poit
+https://en.wikipedia.org/wiki/Sequence_point</li>
+</ul>
+
+<hr />
+<h2 id="09-慎用macro">09. 慎用Macro</h2>
+
+<p>Macro 是個像鐵鎚一樣好用又危險的工具：<br />
+用得好可以釘釘子，用不好可以把釘子打彎、敲到你手指或被抓去吃子彈。<br />
+因為 macro 定義出的「偽函式」有以下缺點：</p>
+
+<ol>
+  <li>debug 會變得複雜。</li>
+  <li>無法遞迴呼叫。</li>
+  <li>無法用 <code class="language-plaintext highlighter-rouge">&amp;</code> 加在 macro name 之前，取得函式位址。</li>
+  <li>可能會導致奇怪的side effect或其他無法預測的問題。</li>
+</ol>
+
+<p>所以，使用macro前，請先確認以上的缺點是否會影響你的程式運行。<br />
+替代方案：<code class="language-plaintext highlighter-rouge">enum</code>(定義整數)，<code class="language-plaintext highlighter-rouge">const T</code>(定義常數)，<code class="language-plaintext highlighter-rouge">inline function</code>(定義函式)</p>
+
+<p>以下就針對macro的缺點做說明：</p>
+
+<ul>
+  <li>debug會變得複雜。
+    <ul>
+      <li>編譯器不能對macro本身做語法檢查，只能檢查預處理(preprocess)後的結果。</li>
+    </ul>
+  </li>
+  <li>無法遞迴呼叫。
+    <ul>
+      <li>根據C standard 6.10.3.4，如果某macro的定義裡裏面含有跟此macro名稱同樣的的字串，該字串將不會被預處理。
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">所以：</span>
+
+  <span class="cp">#define pr(n) ((n==1)? 1 : pr(n-1))
+</span>  <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="n">pr</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="err">預處理過後會變成：</span>
+
+  <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="p">((</span><span class="mi">5</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">pr</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">// pr沒有定義，編譯會出錯</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>無法用 &amp; 加在 macro name 之前，取得函式位址。
+    <ul>
+      <li>因為他不是函式，所以你也不可以把函式指標套用在macro上。</li>
+    </ul>
+  </li>
+  <li>可能會導致奇怪的side effect或其他無法預測的問題。
+    <ul>
+      <li>錯誤例子：
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="cp">#include &lt;stdio.h&gt;
+</span>  <span class="cp">#define SQUARE(x)    (x * x)
+</span>  <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+  <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">SQUARE</span><span class="p">(</span><span class="mi">10</span><span class="o">-</span><span class="mi">5</span><span class="p">));</span> <span class="c1">// 預處理後變成SQUARE(10-5*10-5)</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>正確例子：在 Macro 定義中, 務必為它的參數個別加上括號
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="cp">#include &lt;stdio.h&gt;
+</span>  <span class="cp">#define SQUARE(x)    ((x) * (x))
+</span>  <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+  <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">SQUARE</span><span class="p">(</span><span class="mi">10</span><span class="o">-</span><span class="mi">5</span><span class="p">));</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div>        </div>
+
+        <p>不過遇到以下有side effect的例子就算加了括號也沒用。</p>
+      </li>
+      <li>錯誤例子：
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MACRO(x)     (((x) * (x)) - ((x) * (x)))
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">MACRO</span><span class="p">(</span><span class="o">++</span><span class="n">x</span><span class="p">));</span> <span class="c1">// 有side effect</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>補充資料：</p>
+
+<ul>
+  <li>http://stackoverflow.com/questions/14041453/why-are-preprocessor-macros-evil-and-what-are-the-alternatives</li>
+  <li>http://stackoverflow.com/questions/12447557/can-we-have-recursive-macros</li>
+  <li>C11 Standard 6.10.3.4</li>
+</ul>
+
+<hr />
+<h2 id="10-不要在-stack-設置過大的變數以避免堆疊溢位stack-overflow">10. 不要在 stack 設置過大的變數以避免堆疊溢位(stack overflow</h2>
+
+<p>由於編譯器會自行決定 stack 的上限，某些預設是數 KB 或數十KB，當變數所需的空間過大時，很容易造成 stack overflow，程式亦隨之當掉 (segmentation fault)。</p>
+
+<p>可能造成堆疊溢位的原因包括遞迴太多次 (多為程式設計缺陷)，或是在 stack 設置過大的變數。</p>
+
+<p>錯誤例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">array</span><span class="p">[</span><span class="mi">10000000</span><span class="p">];</span>       <span class="c1">// 在stack宣告過大陣列</span>
+</code></pre></div></div>
+
+<p>正確例子：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span> <span class="mi">10000000</span><span class="o">*</span><span class="nf">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">);</span>
+</code></pre></div></div>
+<p>說明：</p>
+
+<p>建議將使用空間較大的變數用malloc/new配置在 heap 上，由於此時 stack 上只需配置一個 int* 的空間指到在heap的該變數，可避免 stack overflow。</p>
+
+<p>使用 heap 時，雖然整個 process 可用的空間是有限的，但採用動態抓取的方式，new 無法配置時會丟出 std::bad_alloc 例外，malloc 無法配置時會回傳 null(註2)，不會影響到正常使用下的程式功能</p>
+
+<p>備註：</p>
+
+<p>註1.<br />
+使用 heap 時，整個 process 可用的空間一樣是有限的，若是需要頻繁地 malloc / free 或 new / delete 較大的空間，需注意避免造成記憶體破碎 (memory fragmentation)。</p>
+
+<p>註2.<br />
+由於 Linux 使用 overcommit 機制管理記憶體， malloc 即使在記憶體不足時仍然會回傳非 NULL 的 address ，同樣情形在 Windows / Mac OS 則會回傳 NULL</p>
+
+<p>補充資料：</p>
+<ul>
+  <li>https://zh.wikipedia.org/wiki/%E5%A0%86%E7%96%8A%E6%BA%A2%E4%BD%8D</li>
+  <li>http://stackoverflow.com/questions/3770457/what-is-memory-fragmentation</li>
+  <li>http://library.softwareverify.com/memory-fragmentation-your-worst-nightmare/</li>
+</ul>
+
+<p>overcommit 跟 malloc:</p>
+<ul>
+  <li>http://goo.gl/V9krbB</li>
+  <li>http://goo.gl/5tCLQc</li>
+</ul>
+
+<hr />
+<h2 id="11-使用浮點數精確度造成的誤差問題">11. 使用浮點數精確度造成的誤差問題</h2>
+
+<p>根據 IEEE 754 的規範，又電腦中是用有限的二進位儲存數字，因此常有可能因為精確度而造成誤差，例如加減乘除，等號大小判斷，分配律等數學上常用到的操作，很有可能因此而出錯(不成立)</p>
+
+<p>更詳細的說明可以參考冼鏡光老師所發表的一文 “使用浮點數最最基本的觀念”
+http://blog.dcview.com/article.php?a=VmhQNVY%2BCzo%3D</p>
+
+<hr />
+<h2 id="12-不要猜想二維陣列可以用-pointer-to-pointer-來傳遞">12. 不要猜想二維陣列可以用 pointer to pointer 來傳遞</h2>
+
+<p>首先必須有個觀念，C 語言中陣列是無法直接拿來傳遞的!<br />
+不過這時候會有人跳出來反駁:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">pass1DArray</span><span class="p">(</span> <span class="kt">int</span> <span class="n">array</span><span class="p">[]</span> <span class="p">);</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="n">pass1DArray</span><span class="p">(</span> <span class="n">a</span> <span class="p">);</span>   <span class="cm">/* 可以合法編譯，而且執行結果正確!! */</span>
+</code></pre></div></div>
+
+<p>事實上，編譯器會這麼看待</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">pass1DArray</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">array</span> <span class="p">);</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="n">pass1DArray</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+</code></pre></div></div>
+
+<p>我們可以順便看出來，array 變數本身可以 decay 成記憶體起頭的位置，因此我們可以 <code class="language-plaintext highlighter-rouge">int *p = a;</code> 這種方式，拿指標去接陣列。<br />
+也因為上述的例子，許多人以為那二維陣列是不是也可以改成 <code class="language-plaintext highlighter-rouge">int **</code></p>
+
+<p>錯誤例子:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">pass2DArray</span><span class="p">(</span> <span class="kt">int</span> <span class="o">**</span><span class="n">array</span> <span class="p">);</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">10</span><span class="p">];</span>
+<span class="n">pass2DArray</span><span class="p">(</span> <span class="n">a</span> <span class="p">);</span>
+<span class="cm">/* 這時候編譯器就會報錯啦 */</span>
+<span class="cm">/* expected ‘int **’ but argument is of type ‘int (*)[10]’*/</span>
+</code></pre></div></div>
+
+<p>在一維陣列中，指標的移動操作，會剛好覆蓋到陣列的範圍。例如，宣告了一個 <code class="language-plaintext highlighter-rouge">a[10]</code>，那我可以把 a 當成指標來操作 <code class="language-plaintext highlighter-rouge">*a</code> 至 <code class="language-plaintext highlighter-rouge">*(a+9)</code><br />
+因此我們可以得到一個概念，在操作的時候，可以 decay 成指標來使用，也就是我可以把一個陣列當成一個指標來使用 (again, <strong>陣列!=指標</strong>)</p>
+
+<p>但是多維陣列中，無法如此使用，事實上這也很直觀，試圖拿一個 <code class="language-plaintext highlighter-rouge">pointer to pointer to int</code> 來操作一個 int 二維陣列，這是不合理的！</p>
+
+<p>儘管我們無法將二維陣列直接 decay 成兩個指標，但是我們可以換個角度想，二維陣列可以看成 <strong>“外層大的一維陣列，每一維內層各又包含著一維陣列”</strong></p>
+
+<p>如果想通了這一點，我們可以仿造之前的規則，把外層大的一維陣列 decay 成指標，該指標指向內層的一維陣列</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">pass2DArray</span><span class="p">(</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">array</span><span class="p">)</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="p">);</span>  <span class="c1">// array 是個指標，指向 int [10]</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">10</span><span class="p">];</span>
+<span class="n">pass2DArray</span><span class="p">(</span> <span class="n">a</span> <span class="p">);</span>
+</code></pre></div></div>
+
+<p>這時候就很好理解了，函數 <code class="language-plaintext highlighter-rouge">pass2DArray</code> 內的 <code class="language-plaintext highlighter-rouge">array[0]</code> 會代表什麼呢？<br />
+答案是它代表著 <code class="language-plaintext highlighter-rouge">a[0]</code> 外層的那一維陣列，裡面包含著內層 <code class="language-plaintext highlighter-rouge">[0]~[9]</code><br />
+也因此 <code class="language-plaintext highlighter-rouge">array[0][2]</code> 就會對應到 <code class="language-plaintext highlighter-rouge">a[0][2]</code> ， <code class="language-plaintext highlighter-rouge">array[4][9]</code> 對應到 <code class="language-plaintext highlighter-rouge">a[4][9]</code></p>
+
+<p>結論就是，只有最外層的那一維陣列可以 decay 成指標，其他維陣列都要明確的指出陣列大小，這樣多維陣列的傳遞就不會有問題了</p>
+
+<p>也因為剛剛的例子，我們可以清楚的知道在傳遞陣列時，實際行為是在傳遞指標，也因此如果我們想用 sizeof 來求得陣列元素個數，那是不可行的</p>
+
+<p>錯誤例子:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">print1DArraySize</span><span class="p">(</span> <span class="kt">int</span><span class="o">*</span> <span class="n">arr</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%u"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span> <span class="cm">/* sizeof(arr) 只是 */</span>
+<span class="p">}</span>                                             <span class="cm">/* 一個指標的大小   */</span>
+
+<span class="err">受此限制，我們必須手動傳入大小</span>
+<span class="kt">void</span> <span class="nf">print1DArraySize</span><span class="p">(</span> <span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">arrSize</span> <span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+<h2 id="13-函式內-new-出來的空間記得要讓主程式的指標接住">13. 函式內 new 出來的空間記得要讓主程式的指標接住</h2>
+
+<p>對指標不熟悉的使用者會以為以下的程式碼是符合預期的</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">newArray</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">local</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">local</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span> <span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="n">newArray</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>接著就會找了很久的 bug，最後仍然搞不懂為什麼 ptr 沒有指向剛剛拿到的合法空間</p>
+
+<p><img src="https://hackmd.io/_uploads/HkPLy_Bfi.png" alt="" /></p>
+
+<p>也許有人會想問，指標不是傳址嗎？</p>
+
+<p>精確來講，指標也是傳值，只不過該值是一個位址 (ex: <code class="language-plaintext highlighter-rouge">0xfefefefe</code>)</p>
+
+<p>local 接到了 ptr 指向的那個位置，接著函式內 local 要到了新的位置<br />
+但是 ptr 指向的位置還是沒變的，因此離開函式後就好像事什麼都沒發生<br />
+( 嚴格說起來還發生了 memory leak )</p>
+
+<p>以下是一種解決辦法</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">*</span> <span class="nf">createNewArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span> <span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="n">createNewArray</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>改成這樣亦可   ( 為何用 int** 就可以？想想他會傳什麼過去給 local )</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">createNewArray</span><span class="p">(</span><span class="kt">int</span><span class="o">**</span> <span class="n">local</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">local</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span> <span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="n">createNewArray</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ptr</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="後記">後記</h2>
+
+<p>從「古時候」流傳下來一篇文章</p>
+
+<p>“The Ten Commandments for C Programmers”(Annotated Edition)
+  by Henry Spencer
+  http://www.lysator.liu.se/c/ten-commandments.html</p>
+
+<p>一方面它不是針對 C 的初學者，一方面它特意模仿中古英文聖經的用語，寫得文謅謅。所以我現在另外寫了這篇，希望能涵蓋最重要的觀念以及初學甚至老手最易犯的錯誤。</p>
+
+<p>作者：潘科元(Khoguan Phuann) (c)2005. 感謝 ptt.cc BBS 的 C_and_CPP 看板眾多網友提供寶貴意見及程式實例。</p>
+
+<p>nowar100 多次加以修改整理，擴充至 13 項，並且製作成動畫版。</p>
+
+<p>wtchen 應板友要求移除動畫並根據C/C++標準修改內容(Ver.2016)</p>
+
+<p>如發現 Bug 請推文回報，謝謝您</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://blog.allen-cheng.com/c/2022/09/30/thirteen_commandments_for_c.html';
+      this.page.identifier = 'https://blog.allen-cheng.com/c/2022/09/30/thirteen_commandments_for_c.html';
+      this.language = 'zh_TW'; // 將語系改為繁體中文
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://allen-blog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<a class="u-url" href="/c/2022/09/30/thirteen_commandments_for_c.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Allen&#39;s Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Allen&#39;s Blog</li><li><a class="u-email" href="mailto:allen.cheng1984@gmail.com">allen.cheng1984@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/allenCheng1984"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">allenCheng1984</span></a></li><li><a href="https://www.twitter.com/AllenCheng1984"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">AllenCheng1984</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>一個興趣使然的 Blog，想寫什麼就寫什麼。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
