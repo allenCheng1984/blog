@@ -3,12 +3,10 @@ layout: post
 title:  The Thirteen Commandments for Newbie C/C++ Programmers
 date:   2022-10-1 06:00:50 +0800
 categories: C
+tag: [程式]
 ---
 
 [from PTT C_and_CPP 版](https://www.ptt.cc/bbs/C_and_CPP/M.1465304337.A.9F2.html)
-
-[友善閱讀(HackMD)](https://hackmd.io/@allencheng/rkfm2IHGo)
-
 
 這裡做排版與筆記, 以 C 語言為主
 
