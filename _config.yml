@@ -21,12 +21,15 @@ timezone: Asia/Taipei
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Allen's blog                          # the main title
+# the main title
+title: Allen's blog
 
-tagline: 想寫什麼就寫什麼   # it will display as the sub-title
+# it will display as the sub-title
+tagline: 想寫什麼就寫什麼
 
-description: >-                        # used by seo meta and the atom feed
-  在社會上打滾，不斷努力向上的軟體工程師。
+# used by seo meta and the atom feed
+description: >-
+  在社會打滾，追求健康、財富與圓滿人生。
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://blog.allen-cheng.com'
@@ -56,7 +59,8 @@ google_site_verification:               # fill in to your verification string
 # The end of `jekyll-seo-tag` settings
 
 google_analytics:
-  id: G-32L8WDYR66# fill in your Google Analytics ID
+  # fill in your Google Analytics ID
+  id: G-32L8WDYR66
   # Google Analytics pageviews report settings
   pv:
     proxy_endpoint:   # fill in the Google Analytics superProxy endpoint of Google App Engine
